@@ -8,7 +8,8 @@ class TicTacToe:
 
     def print_instructions(self):
         # TODO: Print the instructions to the game
-        print("Welcome to TicTacToe!\nPlayer 1 is X and Player 2 is 0\nTake turns placing your pieces - the first to 3 in a row wins!")
+        print("Welcome to TicTacToe!\nPlayer 1 is X and Player 2 is 0\nTake turns placing your pieces - the first to "
+              "3 in a row wins!")
 
     def print_board(self):
         # TODO: Print the board
@@ -44,10 +45,24 @@ class TicTacToe:
         self.place_player(player, input_row, input_col)
         self.print_board()
 
+    def take_random_turn(self, player):
+        rand_row = random.randint(0, 2)
+        rand_col = random.randint(0, 2)
+        while not self.is_valid_move(rand_row, rand_col):
+            rand_row = random.randint(0, 2)
+            rand_col = random.randint(0, 2)
+        print("Enter a row: " + str(rand_row))
+        print("Enter a col: " + str(rand_col))
+        self.place_player(player, rand_row, rand_col)
+        self.print_board()
+
     def take_turn(self, player):
         # TODO: Simply call the take_manual_turn function
         print(str(player) + "'s Turn")
-        self.take_manual_turn(player)
+        if player == "X":
+            self.take_manual_turn(player)
+        else:
+            self.take_random_turn(player)
 
     def check_col_win(self, player):
         # TODO: Check col win
@@ -108,5 +123,3 @@ class TicTacToe:
                     player = "O"
                 else:
                     player = "X"
-
-
